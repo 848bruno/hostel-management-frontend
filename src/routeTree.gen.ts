@@ -11,12 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DashboardUsersRouteImport } from './routes/dashboard/users'
-import { Route as DashboardRoomsRouteImport } from './routes/dashboard/rooms'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardStudentsRouteImport } from './routes/dashboard/students'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
 import { Route as DashboardFeedbacksRouteImport } from './routes/dashboard/feedbacks'
-import { Route as DashboardCoursesRouteImport } from './routes/dashboard/courses'
 import { Route as DashboardComplaintsRouteImport } from './routes/dashboard/complaints'
 import { Route as DashboardAdminsRouteImport } from './routes/dashboard/admins'
 
@@ -30,19 +31,29 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardUsersRoute = DashboardUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
-const DashboardRoomsRoute = DashboardRoomsRouteImport.update({
-  id: '/rooms',
-  path: '/rooms',
+const DashboardStudentsRoute = DashboardStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardProfileRoute = DashboardProfileRouteImport.update({
@@ -53,11 +64,6 @@ const DashboardProfileRoute = DashboardProfileRouteImport.update({
 const DashboardFeedbacksRoute = DashboardFeedbacksRouteImport.update({
   id: '/feedbacks',
   path: '/feedbacks',
-  getParentRoute: () => DashboardRoute,
-} as any)
-const DashboardCoursesRoute = DashboardCoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardComplaintsRoute = DashboardComplaintsRouteImport.update({
@@ -73,82 +79,88 @@ const DashboardAdminsRoute = DashboardAdminsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/signup': typeof SignupRoute
   '/dashboard/admins': typeof DashboardAdminsRoute
   '/dashboard/complaints': typeof DashboardComplaintsRoute
-  '/dashboard/courses': typeof DashboardCoursesRoute
   '/dashboard/feedbacks': typeof DashboardFeedbacksRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/rooms': typeof DashboardRoomsRoute
-  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard/students': typeof DashboardStudentsRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRouteWithChildren
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/signup': typeof SignupRoute
   '/dashboard/admins': typeof DashboardAdminsRoute
   '/dashboard/complaints': typeof DashboardComplaintsRoute
-  '/dashboard/courses': typeof DashboardCoursesRoute
   '/dashboard/feedbacks': typeof DashboardFeedbacksRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/rooms': typeof DashboardRoomsRoute
-  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard/students': typeof DashboardStudentsRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/signup': typeof SignupRoute
   '/dashboard/admins': typeof DashboardAdminsRoute
   '/dashboard/complaints': typeof DashboardComplaintsRoute
-  '/dashboard/courses': typeof DashboardCoursesRoute
   '/dashboard/feedbacks': typeof DashboardFeedbacksRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/rooms': typeof DashboardRoomsRoute
-  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard/students': typeof DashboardStudentsRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
     | '/dashboard'
     | '/signup'
     | '/dashboard/admins'
     | '/dashboard/complaints'
-    | '/dashboard/courses'
     | '/dashboard/feedbacks'
     | '/dashboard/profile'
-    | '/dashboard/rooms'
-    | '/dashboard/users'
+    | '/dashboard/students'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard'
+    | '/about'
+    | '/contact'
     | '/signup'
     | '/dashboard/admins'
     | '/dashboard/complaints'
-    | '/dashboard/courses'
     | '/dashboard/feedbacks'
     | '/dashboard/profile'
-    | '/dashboard/rooms'
-    | '/dashboard/users'
+    | '/dashboard/students'
+    | '/dashboard'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/contact'
     | '/dashboard'
     | '/signup'
     | '/dashboard/admins'
     | '/dashboard/complaints'
-    | '/dashboard/courses'
     | '/dashboard/feedbacks'
     | '/dashboard/profile'
-    | '/dashboard/rooms'
-    | '/dashboard/users'
+    | '/dashboard/students'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   SignupRoute: typeof SignupRoute
 }
@@ -169,6 +181,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -176,18 +202,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard/users': {
-      id: '/dashboard/users'
-      path: '/users'
-      fullPath: '/dashboard/users'
-      preLoaderRoute: typeof DashboardUsersRouteImport
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
-    '/dashboard/rooms': {
-      id: '/dashboard/rooms'
-      path: '/rooms'
-      fullPath: '/dashboard/rooms'
-      preLoaderRoute: typeof DashboardRoomsRouteImport
+    '/dashboard/students': {
+      id: '/dashboard/students'
+      path: '/students'
+      fullPath: '/dashboard/students'
+      preLoaderRoute: typeof DashboardStudentsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/profile': {
@@ -202,13 +228,6 @@ declare module '@tanstack/react-router' {
       path: '/feedbacks'
       fullPath: '/dashboard/feedbacks'
       preLoaderRoute: typeof DashboardFeedbacksRouteImport
-      parentRoute: typeof DashboardRoute
-    }
-    '/dashboard/courses': {
-      id: '/dashboard/courses'
-      path: '/courses'
-      fullPath: '/dashboard/courses'
-      preLoaderRoute: typeof DashboardCoursesRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/complaints': {
@@ -231,21 +250,19 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteChildren {
   DashboardAdminsRoute: typeof DashboardAdminsRoute
   DashboardComplaintsRoute: typeof DashboardComplaintsRoute
-  DashboardCoursesRoute: typeof DashboardCoursesRoute
   DashboardFeedbacksRoute: typeof DashboardFeedbacksRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
-  DashboardRoomsRoute: typeof DashboardRoomsRoute
-  DashboardUsersRoute: typeof DashboardUsersRoute
+  DashboardStudentsRoute: typeof DashboardStudentsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAdminsRoute: DashboardAdminsRoute,
   DashboardComplaintsRoute: DashboardComplaintsRoute,
-  DashboardCoursesRoute: DashboardCoursesRoute,
   DashboardFeedbacksRoute: DashboardFeedbacksRoute,
   DashboardProfileRoute: DashboardProfileRoute,
-  DashboardRoomsRoute: DashboardRoomsRoute,
-  DashboardUsersRoute: DashboardUsersRoute,
+  DashboardStudentsRoute: DashboardStudentsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
@@ -254,6 +271,8 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
   SignupRoute: SignupRoute,
 }

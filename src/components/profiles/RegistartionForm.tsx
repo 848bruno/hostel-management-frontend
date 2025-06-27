@@ -5,17 +5,11 @@ import { Role } from "@/constatnts/Role"
 import { useCreateProfile } from "@/hooks/useProfile"
 
 const formSchema = z.object({
-    first_name: z
+    username: z
         .string()
-        .min(2, 'First name must be at least 2 characters')
-        .max(50, 'First name must be less than 50 characters'),
-    last_name: z
-        .string()
-        .min(2, 'Last name must be at least 2 characters')
-        .max(50, 'Last name must be less than 50 characters'),
-    phone_number: z
-        .string()
-        .min(10, 'Phone_number must be at least 10 characters'),
+        .min(2, 'Username must be at least 2 characters')
+        .max(50, 'Username must be less than 50 characters'),
+
     email: z
         .string()
         .email('Please enter a valid email address')
@@ -24,8 +18,8 @@ const formSchema = z.object({
         .string()
         .min(6, 'Password must be at least 6 characters')
         .max(100, 'Password must be less than 100 characters'),
-    role: z.enum([Role.USER, Role.ADMIN, Role.GUEST], {
-        errorMap: () => ({ message: 'Role must be one of the following: student, faculty, admin, guest' }),
+    role: z.enum([Role.STUDENT, Role.ADMIN, Role.GUEST], {
+        errorMap: () => ({ message: 'Role must be one of the following: student, admin, guest' }),
     })
 })
 
@@ -54,10 +48,8 @@ function RegistrationForm() {
 
     const form = useForm({
         defaultValues: {
-            first_name: '',
-            last_name: '',
-            phone_number: '',
-            email: '',
+            username: '',
+              email: '',
             password: '',
             role: Role.GUEST, // Default role set to 'guest'        
         } as FormData,
@@ -91,17 +83,17 @@ function RegistrationForm() {
                 }}
                 className="space-y-4"
             >
-                {/* First Name Field */}
+                {/* Username Field */}
                 <form.Field
-                    name="first_name"
+                    name="username"
                     validators={{
-                        onChange: ({ value }) => validateField(value, formSchema.shape.first_name),
-                        onBlur: ({ value }) => validateField(value, formSchema.shape.first_name),
+                        onChange: ({ value }) => validateField(value, formSchema.shape.username),
+                        onBlur: ({ value }) => validateField(value, formSchema.shape.username),
                     }}
                     children={(field) => (
                         <div>
                             <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 mb-1">
-                                First Name
+                                username
                             </label>
                             <input
                                 type="text"
@@ -125,73 +117,9 @@ function RegistrationForm() {
                     )}
                 />
 
-                {/* Last Name Field */}
-                <form.Field
-                    name="last_name"
-                    validators={{
-                        onChange: ({ value }) => validateField(value, formSchema.shape.last_name),
-                        onBlur: ({ value }) => validateField(value, formSchema.shape.last_name),
-                    }}
-                    children={(field) => (
-                        <div>
-                            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 mb-1">
-                                Last Name
-                            </label>
-                            <input
-                                type="text"
-                                id={field.name}
-                                name={field.name}
-                                value={field.state.value}
-                                onBlur={field.handleBlur}
-                                onChange={(e) => field.handleChange(e.target.value)}
-                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${field.state.meta.errors.length > 0
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300'
-                                    }`}
-                                placeholder="Enter your last name"
-                            />
-                            {field.state.meta.errors.length > 0 && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {String(field.state.meta.errors[0])}
-                                </p>
-                            )}
-                        </div>
-                    )}
-                />
+                
 
-                {/* Phone_number Field */}
-                <form.Field
-                    name="phone_number"
-                    validators={{
-                        onChange: ({ value }) => validateField(value, formSchema.shape.phone_number),
-                        onBlur: ({ value }) => validateField(value, formSchema.shape.phone_number),
-                    }}
-                    children={(field) => (
-                        <div>
-                            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 mb-1">
-                                Phone Number
-                            </label>
-                            <input
-                                type="text"
-                                id={field.name}
-                                name={field.name}
-                                value={field.state.value}
-                                onBlur={field.handleBlur}
-                                onChange={(e) => field.handleChange(e.target.value)}
-                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${field.state.meta.errors.length > 0
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300'
-                                    }`}
-                                placeholder="Enter your Phone Number"
-                            />
-                            {field.state.meta.errors.length > 0 && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {String(field.state.meta.errors[0])}
-                                </p>
-                            )}
-                        </div>
-                    )}
-                />
+             
 
                 {/* Email Field */}
                 <form.Field
@@ -283,7 +211,7 @@ function RegistrationForm() {
                                     : 'border-gray-300'
                                     }`}
                             >
-                                <option value={Role.USER}>User</option>
+                                <option value={Role.STUDENT}>Student</option>
                                 <option value={Role.ADMIN}>Admin</option>
                                 <option defaultChecked value={Role.GUEST}>Guest</option>
                             </select>

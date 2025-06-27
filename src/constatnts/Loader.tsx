@@ -1,9 +1,11 @@
 import { FadeLoader } from 'react-spinners';
 
 function Loaders() {
-    return <FadeLoader
-        color='#d2db4e'
-    />
+  return (
+    <div className="flex items-center justify-center h-screen w-full bg-gray-100">
+      <FadeLoader color="gray" />
+    </div>
+  );
 }
 
-export default Loaders
+export default Loaders;
