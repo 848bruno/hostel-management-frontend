@@ -1,13 +1,4 @@
 {
-	"dependencies": {
-		"@headlessui/react": "^2.2.4",
-		"@tanstack/react-router": "^1.121.34",
-		"axios": "^1.10.0",
-		"react-hook-form": "^7.58.1",
-		"react-hot-toast": "^2.5.2",
-		"react-icons": "^5.5.0"
-	}
-}
   "name": "frontend",
   "private": true,
   "type": "module",
@@ -22,6 +13,12 @@
     "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@tanstack/react-router": "^1.121.34",
+    "axios": "^1.10.0",
+    "react-hook-form": "^7.58.1",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.1.2",
